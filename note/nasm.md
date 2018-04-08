@@ -1,6 +1,6 @@
-#nasm笔记
+# nasm笔记
 
-##linux下编译
+## linux下编译
 hello.asm  
 
 <code>nasm -f elf64 hello.asm -g -F stabs</code>  
@@ -16,7 +16,7 @@ hello.asm
 <code>gdb hello</code>
 进入debug模式  
 
-##gdb debug
+## gdb debug
 <code>list  //可简写为l</code> : 列出未执行代码
 
 <code>break 16</code>  在16行设置断点
@@ -26,11 +26,11 @@ hello.asm
 <code>run // 可简写为r</code>  运行程序到断点
 
 <code>info break //可简写为i break</code>  查看当前设置的所有断点信息
-![图片丢失]("../resource/img/breakInfo")
+![图片丢失](https://github.com/waxnkw/OScourse/raw/master/resource/img/breakInfo.PNG)
 
 <code>bt</code>  显示当前栈数据
 
 <code>info registers</code>  显示当前所有寄存器信息
-![图片丢失]("../resource/img/registersInfo")
+![图片丢失](https://github.com/waxnkw/OScourse/raw/master/resource/img/registersInfo.PNG)
 
 <code>info registers eax</code>  只显示一个寄存器信息(如eax)
