@@ -26,7 +26,7 @@ hello.asm
 <code>run // 可简写为r</code>  运行程序到断点
 
 <code>info break //可简写为i break</code>  查看当前设置的所有断点信息
-![图片丢失]("../resource/img/breakInfo.PNG")
+![图片丢失]("./resource/img/breakInfo.PNG")
 
 <code>bt</code>  显示当前栈数据
 
