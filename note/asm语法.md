@@ -48,7 +48,7 @@
 >> 有bp:ss  有bx:ds
 >> <code>mov ax,[bx+di]</code>
 >> 可以用于数组处理
-![段寄存器引用规定](../resourse/img/asm/asm4.PNG)
+![段寄存器引用规定](./resourse/img/asm/asm4.PNG)
 
 7. 相对地址加变址
 >> <code>mov ax, [bx,di,1234h]</code>
