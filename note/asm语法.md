@@ -24,31 +24,31 @@
 >> XXXXx: 段地址:XXXX 偏移:x 物理地址=段地址<<2+偏移
 >> 取指令 段：CS 偏移IP
 >> 堆栈操作 段:SS 偏移SP
-![段寄存器引用规定](../resourse/img/asm/asm1.PNG)
+![段寄存器引用规定](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm1.PNG)
 
 ## 8086寻址方式
 1. 立即寻址: mov ax, 1234H 给寄存器or储存单元赋初值
 2. 寄存器寻址: mov si, ax
 3. 直接寻址: DS=5000H <code>mov ax, [1234]//不明确指出DS</code>
-![段寄存器引用规定](../resourse/img/asm/asm2.PNG)
+![段寄存器引用规定](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm2.PNG)
 
 4. 寄存器间接寻址: mov ax, [si]。 
 >> 非默认的 mov ax,CS:[bx]
 >> 默认的段地址如下:
-![段寄存器引用规定](../resourse/img/asm/asm1.PNG) 
+![段寄存器引用规定](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm1.PNG) 
 
 >> 表格处理 <code>mov [bp],cx</code>
 
 5. 寄存器相对寻址: EA=bx/bp/si/di + 8/16位移量
 >> <code>mov ax, [di+1223h]//默认为ds</code> 代表ds+di+1223h
 >> 同样可以用于表格处理
-![段寄存器引用规定](../resourse/img/asm/asm3.PNG)
+![段寄存器引用规定](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm3.PNG)
 
 6. 基址加变址的方式: EA = BX/BP + SI/DI
 >> 有bp:ss  有bx:ds
 >> <code>mov ax,[bx+di]</code>
 >> 可以用于数组处理
-![段寄存器引用规定](./resourse/img/asm/asm4.PNG)
+![段寄存器引用规定](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm4.PNG)
 
 7. 相对地址加变址
 >> <code>mov ax, [bx,di,1234h]</code>
