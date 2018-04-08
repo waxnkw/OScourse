@@ -1,6 +1,6 @@
-#nasm笔记
+# nasm笔记
 
-##linux下编译
+## linux下编译
 hello.asm  
 
 <code>nasm -f elf64 hello.asm -g -F stabs</code>  
@@ -16,7 +16,7 @@ hello.asm
 <code>gdb hello</code>
 进入debug模式  
 
-##gdb debug
+## gdb debug
 <code>list  //可简写为l</code> : 列出未执行代码
 
 <code>break 16</code>  在16行设置断点
