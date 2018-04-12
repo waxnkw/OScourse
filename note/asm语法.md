@@ -89,7 +89,7 @@
 3. 具体实现过程
 >>个人倾向于通过规范化的注释来完成函数与调用者的协议声明。  
 首先是函数书写:   
-[asm5](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm5.PNG)    
+![asm5](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm5.PNG)    
 
 >>swap two mem  本函数的作用,即交换两个内存区域   
 rely:  需要使用的全局变量。目的是以后进行函数复用的时候,提醒对于函数外部全局变量的依赖。比如在本例中需要使用buf1来做swap的中转站   
@@ -97,10 +97,10 @@ caller-save: 需要由调用者保存的寄存器
 param: 参数传递的寄存器,以及其具体的含义  
 callee-save: 被调用者内部使用的寄存器。  
 
-[asm6](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm6.PNG)
+![asm6](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm6.PNG)
 >>函数内部书写: 如上图所示,在函数开始部分进行需要使用的寄存器的保存,在函数结束后,按照相反的顺序pop还原
 
-[asm7](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm7.PNG)
+![asm7](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm7.PNG)
 >>调用方式: 如上图,调用提及的print_s函数。
 首先按照协议保存caller-save registers <code>push rdi</code> <code>push rsi</code>         
 第二步进行调用函数参数的填充       
