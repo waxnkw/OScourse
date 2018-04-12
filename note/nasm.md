@@ -47,7 +47,7 @@ a 按十六进制格式显示变量。
 c 按字符格式显示变量。  
 f 按浮点数格式显示变量。  
 
-u:b表示单字节，h表示双字节，w表示四字 节，g表示八字节
+u:b表示单字节，h表示双字节，w表示四字节，g表示八字节
 
 例子: <code>x/64cb 0x445455</code> 显示以0x445455为起始地址的内容
 ![图片丢失](https://github.com/waxnkw/OScourse/raw/master/resource/img/nasm1.PNG)

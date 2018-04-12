@@ -53,4 +53,62 @@
 7. 相对地址加变址
 >> <code>mov ax, [bx,di,1234h]</code>
 
+## 指令的使用
+可以访问 [asm指令](http://www.felixcloutier.com/x86/ "asm指令") 进行查询，里面包括了各种指令的兼容性问题，以及指令的具体使用的介绍，十分方便。
+
+## 函数调用方式
+1. call, leave, ret, enter:
+>> call: <code>push eip</code> 进行当前执行指令的改变
+ leave: <code>mov esp,ebp; pop ebp</code> 进行函数栈帧的恢复，即回到调用者函数栈
+ enter: <code>push ebp; mov ebp,esp</code>  进行函数栈帧的改变,即进入被调用函数函数栈
+ ret : <code>pop eip</code>  回到调用者指令部分,继续执行
+ 写的时候: <code>call f</code>  <code>ret</code>
+ or call enter leave ret
+
+2. linux64位系统下syscall与int 80h不同,不能混用。没有查清楚,不多加赘述。
+
+
+
+## 个人代码书写范式
+    会从函数书写方式，调用协议;注释风格;条件语句设计;循环语句设计进行介绍。
+    部分模仿了c语言格式,但是在栈帧的改变方面,返回值设计方面都有不同
+    背景: 64位linux下,使用64位的寄存器
+### 个人函数调用
+1. 寄存器使用:    
+>>传参寄存器: rdi, rsi, rdx, r8, r9, r10, r11, r12, r13, r14, r15
+
+  函数内使用寄存器: r8及以后,未用来传参的寄存器。比如使用 rdi, rsi传参,则在函数内部可使用r8到r15进行计算。有时也会有使用其他寄存器的特例。
+ 
+  返回值寄存器:rax rbx rcx。 为简化代码,允许三个以内的返回值 
+
+2. 寄存器保存
+>>caller-save(调用者保存): params即用来进行参数传递的寄存器
+
+>>callee-save(被调用者保存): 内部计算储存局部变量的寄存器
+
+3. 具体实现过程
+>>个人倾向于通过规范化的注释来完成函数与调用者的协议声明。  
+首先是函数书写:   
+[asm5](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm5.PNG)    
+
+>>swap two mem  本函数的作用,即交换两个内存区域   
+rely:  需要使用的全局变量。目的是以后进行函数复用的时候,提醒对于函数外部全局变量的依赖。比如在本例中需要使用buf1来做swap的中转站   
+caller-save: 需要由调用者保存的寄存器   
+param: 参数传递的寄存器,以及其具体的含义  
+callee-save: 被调用者内部使用的寄存器。  
+
+[asm6](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm6.PNG)
+>>函数内部书写: 如上图所示,在函数开始部分进行需要使用的寄存器的保存,在函数结束后,按照相反的顺序pop还原
+
+[asm7](https://github.com/waxnkw/OScourse/raw/master/resource/img/asm/asm7.PNG)
+>>调用方式: 如上图,调用提及的print_s函数。
+首先按照协议保存caller-save registers <code>push rdi</code> <code>push rsi</code>         
+第二步进行调用函数参数的填充       
+第三步进行函数的调用 <code>call print_s</code>      
+第四步进行保存参数的恢复 <code>pop rsi</code>  <code>pop rdi</code>     
+最后如果有返回值,则进行返回值处理   
+补充说明: 建议每次都采取这种傻瓜式push pop,不要为了节省代码而少保存几个caller-save寄存器。
+比如当前rdi填充callee使用的参数,且没有进行传递前保存,结果在callee中修改了其中的值。而rdi中的值在下文中仍需要使用.
+这时callee修改了rdi的值,就翻车了。   
+作者之前,因为rdx做计数器,没保存,结果被callee改了,de了半天bug   
 //TODO
